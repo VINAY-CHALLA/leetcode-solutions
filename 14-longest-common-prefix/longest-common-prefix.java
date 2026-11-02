@@ -9,7 +9,7 @@ class Solution {
         int longest = Integer.MAX_VALUE;
         for (int i = 0; i < strs.length - 1; i++) {
             int matching = 0;
-            int smallStringLen = strs[i].length() < strs[i + 1].length() ? strs[i].length() : strs[i + 1].length();
+            int smallStringLen = Math.min(strs[i].length(), strs[i + 1].length());
             for (int index = 0; index < smallStringLen; index++) {
                 if (strs[i].charAt(index) == strs[i + 1].charAt(index)) {
                     matching++;
@@ -17,9 +17,8 @@ class Solution {
                     break;
                 }
             }
-            longest = longest < matching ? longest : matching;
+            longest = Math.min(longest, matching);
         }
         return strs[0].substring(0, longest);
-
     }
 }
