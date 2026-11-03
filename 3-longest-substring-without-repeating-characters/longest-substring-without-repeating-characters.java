@@ -1,16 +1,32 @@
+
+import java.util.HashSet;
+import java.util.Set;
+
 class Solution {
     public int lengthOfLongestSubstring(String s) {
-        LinkedList<Character> array = new LinkedList<>();
-        int LongestString = 0;
-        for (char c : s.toCharArray()) {
-            while (array.contains(c)) {
-                array.removeFirst();
+
+        Set<Character> set = new HashSet<>();
+
+        int left = 0;
+        int longest = 0;
+
+        for (int right = 0; right < s.length(); right++) {
+
+            char current = s.charAt(right);
+
+            // Remove characters until duplicate is removed
+            while (set.contains(current)) {
+                set.remove(s.charAt(left));
+                left++;
             }
-            array.add(c);
-            if (LongestString < array.size()) {
-                LongestString = array.size();
-            }
+
+            // Add current character
+            set.add(current);
+
+            // Update maximum window length
+            longest = Math.max(longest, right - left + 1);
         }
-        return LongestString;
+
+        return longest;
     }
 }
