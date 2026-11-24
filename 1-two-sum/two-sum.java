@@ -1,23 +1,17 @@
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 class Solution {
     public int[] twoSum(int[] nums, int target) {
-
-        Map<Integer, Integer> map = new HashMap<>();
-
-        for (int i = 0; i < nums.length; i++) {
-
-            int complement = target - nums[i];
-
-            if (map.containsKey(complement)) {
-                return new int[]{map.get(complement), i};
+        LinkedHashMap<Integer,Integer> lsm=new LinkedHashMap();
+        for(int ele=0;ele<nums.length;ele++){
+            if(lsm.containsKey(target-nums[ele])){
+                return new int[]{lsm.get(target-nums[ele]),ele};
             }
-
-            map.put(nums[i], i);
+            lsm.put(nums[ele],ele);
         }
-
+        
         return new int[]{};
     }
 }
